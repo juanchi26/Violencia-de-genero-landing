@@ -10,6 +10,9 @@ body {
     background-color: var(--light-color);
     overflow-x: hidden;
 }
+h2{
+    color: var(--primary-color);
+}
 .hero {
     background-color: var(--primary-color);
     color: white;

@@ -288,4 +288,50 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.alt = title;
         modalDescription.textContent = description;
     });
+
+    // Active NavBar link highlighting
+    const navLinks = document.querySelectorAll('#navbarNav .nav-link');
+    const sections = [];
+    navLinks.forEach(link => {
+        const section = document.querySelector(link.getAttribute('href'));
+        if (section) {
+            sections.push(section);
+        }
+    });
+
+    const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navbar-height'), 10) || 70;
+
+    function highlightActiveLink() {
+        let currentSectionId = '';
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - navHeight - 10; // Adjusted offset by an extra 10px
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                currentSectionId = section.id;
+            }
+        });
+        
+        // Check if scrolled to the bottom of the page
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - navHeight) {
+             // If sections array is not empty, set the last section as active
+            if (sections.length > 0) {
+                currentSectionId = sections[sections.length - 1].id;
+            }
+        }
+
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightActiveLink);
+    window.addEventListener('resize', highlightActiveLink); // Recalculate on resize
+    highlightActiveLink(); // Initial call
 });

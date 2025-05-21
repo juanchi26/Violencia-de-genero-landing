@@ -3,13 +3,60 @@
     --secondary-color: #D8BFD8;
     --text-color: #333;
     --light-color: #F5E6E8;
+    --navbar-height: 70px; /* Define a variable for navbar height */
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     color: var(--text-color);
     background-color: var(--light-color);
     overflow-x: hidden;
+    padding-top: var(--navbar-height); /* Add padding to prevent overlap */
 }
+
+/* Navbar Customizations */
+.navbar {
+    background-color: var(--primary-color) !important; /* Override Bootstrap's bg-dark */
+    transition: top 0.3s; /* For potential hide/show effects, though not implemented yet */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white !important;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    margin-right: 10px;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--secondary-color) !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-link.active { /* Assuming 'active' class will be added by JS or manually for current section */
+    font-weight: bold;
+    color: var(--secondary-color) !important;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5) !important; /* Make toggler border more visible */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* Brighter toggler icon */
+}
+
+
 h2{
     color: var(--primary-color);
 }
